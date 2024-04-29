@@ -10,6 +10,7 @@ thai_lottery_dataset = load_dataset("ANTDPU/ThaiGovernmentLotteryResults")
 
 # Convert the dataset to a pandas DataFrame
 df = pd.DataFrame(thai_lottery_dataset['train'])
+print(df)
 
 # Preprocess the data
 # Assuming 'date' is a string column representing the date in format 'YYYY-MM-DD'
@@ -45,6 +46,7 @@ future_data['month'] = pd.to_datetime(future_data['date']).dt.month
 future_data['day'] = pd.to_datetime(future_data['date']).dt.day
 
 future_predictions = model.predict(future_data[['year', 'month', 'day']])
+future_predictions = future_predictions.round().astype(int)
 
 print("Predicted future lottery numbers:")
 print(future_predictions)
